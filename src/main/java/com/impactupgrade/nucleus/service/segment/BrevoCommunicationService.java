@@ -119,7 +119,7 @@ public class BrevoCommunicationService extends AbstractCommunicationService {
 
     Map<String, Object> customFieldMap = new HashMap<>();
 
-    List<CustomField> customFields = buildContactCustomFields(crmContact, config, list);
+    Map<String, CustomField> customFields = buildContactCustomFields(crmContact, config, list);
     if (attributeNames.isEmpty()) {
       List<GetAttributesAttributes> attributes = brevoClient.getAttributes();
       for (GetAttributesAttributes attribute : attributes) {
@@ -133,7 +133,7 @@ public class BrevoCommunicationService extends AbstractCommunicationService {
     }
 
     // create custom fields' attributes
-    for (CustomField customField : customFields) {
+    for (CustomField customField : customFields.values()) {
       if (customField.value == null) {
         continue;
       }

@@ -161,14 +161,14 @@ public class MailchimpCommunicationService extends AbstractCommunicationService 
 
     Map<String, Object> customFieldMap = new HashMap<>();
 
-    List<CustomField> customFields = buildContactCustomFields(crmContact, config, list);
+    Map<String, CustomField> customFields = buildContactCustomFields(crmContact, config, list);
     if (mergeFieldsNameToTag.isEmpty()) {
       List<MergeFieldInfo> mergeFields = mailchimpClient.getMergeFields(list.id);
       for (MergeFieldInfo mergeField : mergeFields) {
         mergeFieldsNameToTag.put(mergeField.name, mergeField.tag);
       }
     }
-    for (CustomField customField : customFields) {
+    for (CustomField customField : customFields.values()) {
       if (customField.value == null) {
         continue;
       }

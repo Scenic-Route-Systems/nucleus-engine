@@ -39,64 +39,65 @@ public abstract class AbstractCommunicationService implements CommunicationServi
     //  SendGridEmailService, even when no CrmService is identified.
   }
 
-  protected List<CustomField> buildContactCustomFields(CrmContact crmContact,
+  // a Set so that subclasses can easily override (or remove) individual fields
+  protected Map<String, CustomField> buildContactCustomFields(CrmContact crmContact,
       EnvironmentConfig.CommunicationPlatform communicationPlatform,
       EnvironmentConfig.CommunicationList communicationList) throws Exception {
-    List<CustomField> customFields = new ArrayList<>();
+    Map<String, CustomField> customFields = new HashMap<>();
 
     if (!Strings.isNullOrEmpty(crmContact.title)) {
-      customFields.add(new CustomField("title", CustomFieldType.STRING, crmContact.title));
+      customFields.put("title", new CustomField("title", CustomFieldType.STRING, crmContact.title));
     }
 
     if (!Strings.isNullOrEmpty(crmContact.mailingAddress.city)) {
-      customFields.add(new CustomField("city", CustomFieldType.STRING, crmContact.mailingAddress.city));
+      customFields.put("city", new CustomField("city", CustomFieldType.STRING, crmContact.mailingAddress.city));
     }
     if (!Strings.isNullOrEmpty(crmContact.mailingAddress.state)) {
-      customFields.add(new CustomField("state", CustomFieldType.STRING, crmContact.mailingAddress.state));
+      customFields.put("state", new CustomField("state", CustomFieldType.STRING, crmContact.mailingAddress.state));
     }
     if (!Strings.isNullOrEmpty(crmContact.mailingAddress.postalCode)) {
-      customFields.add(new CustomField("postal_code", CustomFieldType.STRING, crmContact.mailingAddress.postalCode));
+      customFields.put("postal_code", new CustomField("postal_code", CustomFieldType.STRING, crmContact.mailingAddress.postalCode));
     }
     if (!Strings.isNullOrEmpty(crmContact.mailingAddress.country)) {
-      customFields.add(new CustomField("country", CustomFieldType.STRING, crmContact.mailingAddress.country));
+      customFields.put("country", new CustomField("country", CustomFieldType.STRING, crmContact.mailingAddress.country));
     }
 
-    customFields.add(new CustomField("crm_contact_id", CustomFieldType.STRING, crmContact.id));
+    customFields.put("crm_contact_id", new CustomField("crm_contact_id", CustomFieldType.STRING, crmContact.id));
     if (crmContact.account.id != null) {
-      customFields.add(new CustomField("crm_account_id", CustomFieldType.STRING, crmContact.account.id));
+      customFields.put("crm_account_id", new CustomField("crm_account_id", CustomFieldType.STRING, crmContact.account.id));
     }
     if (crmContact.firstDonationDate != null) {
-      customFields.add(new CustomField("date_of_first_donation", CustomFieldType.DATE, crmContact.firstDonationDate));
+      customFields.put("date_of_first_donation", new CustomField("date_of_first_donation", CustomFieldType.DATE, crmContact.firstDonationDate));
     }
     if (crmContact.lastDonationDate != null) {
-      customFields.add(new CustomField("date_of_last_donation", CustomFieldType.DATE, crmContact.lastDonationDate));
+      customFields.put("date_of_last_donation", new CustomField("date_of_last_donation", CustomFieldType.DATE, crmContact.lastDonationDate));
     }
     if (crmContact.largestDonationAmount != null) {
-      customFields.add(new CustomField("largest_donation", CustomFieldType.CURRENCY, crmContact.largestDonationAmount));
+      customFields.put("largest_donation", new CustomField("largest_donation", CustomFieldType.CURRENCY, crmContact.largestDonationAmount));
     }
     if (crmContact.totalDonationAmount != null) {
-      customFields.add(new CustomField("total_of_donations", CustomFieldType.CURRENCY, crmContact.totalDonationAmount));
+      customFields.put("total_of_donations", new CustomField("total_of_donations", CustomFieldType.CURRENCY, crmContact.totalDonationAmount));
     }
     if (crmContact.numDonations != null) {
-      customFields.add(new CustomField("number_of_donations", CustomFieldType.NUMBER, crmContact.numDonations));
+      customFields.put("number_of_donations", new CustomField("number_of_donations", CustomFieldType.NUMBER, crmContact.numDonations));
     }
     if (crmContact.totalDonationAmountYtd != null) {
-      customFields.add(new CustomField("total_of_donations_ytd", CustomFieldType.CURRENCY, crmContact.totalDonationAmountYtd));
+      customFields.put("total_of_donations_ytd", new CustomField("total_of_donations_ytd", CustomFieldType.CURRENCY, crmContact.totalDonationAmountYtd));
     }
     if (crmContact.numDonationsYtd != null) {
-      customFields.add(new CustomField("number_of_donations_ytd", CustomFieldType.NUMBER, crmContact.numDonationsYtd));
+      customFields.put("number_of_donations_ytd", new CustomField("number_of_donations_ytd", CustomFieldType.NUMBER, crmContact.numDonationsYtd));
     }
     if (crmContact.totalDonationAmountLy != null) {
-      customFields.add(new CustomField("total_of_donations_ly", CustomFieldType.CURRENCY, crmContact.totalDonationAmountLy));
+      customFields.put("total_of_donations_ly", new CustomField("total_of_donations_ly", CustomFieldType.CURRENCY, crmContact.totalDonationAmountLy));
     }
     if (crmContact.numDonationsLy != null) {
-      customFields.add(new CustomField("number_of_donations_ly", CustomFieldType.NUMBER, crmContact.numDonationsLy));
+      customFields.put("number_of_donations_ly", new CustomField("number_of_donations_ly", CustomFieldType.NUMBER, crmContact.numDonationsLy));
     }
 
-    customFields.addAll(communicationPlatform.crmFieldToCommunicationFields.stream()
+    communicationPlatform.crmFieldToCommunicationFields.stream()
             .map(mapping -> getCustomField(crmContact, mapping))
             .filter(Objects::nonNull)
-            .collect(Collectors.toSet()));
+            .forEach(cf -> customFields.put(cf.name, cf));
 
     return customFields;
   }

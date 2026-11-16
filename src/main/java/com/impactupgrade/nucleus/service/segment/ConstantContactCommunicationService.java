@@ -160,14 +160,14 @@ public class ConstantContactCommunicationService extends AbstractCommunicationSe
 
     Map<String, Object> customFieldMap = new HashMap<>();
 
-    List<CustomField> contactCustomFields = buildContactCustomFields(crmContact, config, list);
+    Map<String, CustomField> contactCustomFields = buildContactCustomFields(crmContact, config, list);
     if (fieldNameToId.isEmpty()) {
       List<ConstantContactClient.CustomField> customFields = constantContactClient.getAllCustomFields();
       for (ConstantContactClient.CustomField customField : customFields) {
         fieldNameToId.put(customField.name, customField.id);
       }
     }
-    for (CustomField contactCustomField : contactCustomFields) {
+    for (CustomField contactCustomField : contactCustomFields.values()) {
       if (contactCustomField.value == null) {
         continue;
       }
