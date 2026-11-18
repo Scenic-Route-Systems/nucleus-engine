@@ -129,17 +129,6 @@ public interface BasicCrmService extends CrmService {
     return null;
   }
 
-  default boolean updateCampaign(CrmCampaign crmCampaign) throws Exception {
-    return true;
-  }
-
-  default List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception {
-    return Collections.emptyList();
-  }
-
-  default void deleteCampaign(String campaignId) throws Exception {
-  }
-
   default boolean updateRecurringDonation(ManageDonationEvent manageDonationEvent) throws Exception {
     return true;
   }

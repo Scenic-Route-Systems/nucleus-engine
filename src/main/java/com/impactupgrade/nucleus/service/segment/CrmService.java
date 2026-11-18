@@ -155,9 +155,6 @@ public interface CrmService extends SegmentService {
   boolean closeRecurringDonation(CrmRecurringDonation crmRecurringDonation) throws Exception;
 
   String insertCampaign(CrmCampaign crmCampaign) throws Exception;
-  boolean updateCampaign(CrmCampaign crmCampaign) throws Exception;
-  List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception;
-  void deleteCampaign(String campaignId) throws Exception;
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // BATCH OPERATIONS

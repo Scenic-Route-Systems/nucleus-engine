@@ -7,7 +7,6 @@ package com.impactupgrade.nucleus.environment;
 import com.google.common.base.Strings;
 import com.impactupgrade.nucleus.client.BrevoClient;
 import com.impactupgrade.nucleus.client.ConstantContactClient;
-import com.impactupgrade.nucleus.client.EventBriteClient;
 import com.impactupgrade.nucleus.client.FactsClient;
 import com.impactupgrade.nucleus.client.MailchimpClient;
 import com.impactupgrade.nucleus.client.SfdcBulkClient;
@@ -237,7 +236,6 @@ public class Environment {
 
   public BrevoClient brevoClient(EnvironmentConfig.CommunicationPlatform brevoConfig) { return new BrevoClient(brevoConfig, this); }
   public ConstantContactClient constantContactClient(EnvironmentConfig.CommunicationPlatform constantContactConfig) { return new ConstantContactClient(constantContactConfig, this); }
-  public EventBriteClient eventBriteClient() { return new EventBriteClient(this); }
   public FactsClient factsClient() { return new FactsClient(this); }
   public MailchimpClient mailchimpClient(EnvironmentConfig.CommunicationPlatform mailchimpConfig) { return new MailchimpClient(mailchimpConfig, this); }
   public SfdcClient sfdcClient() { return new SfdcClient(this); }

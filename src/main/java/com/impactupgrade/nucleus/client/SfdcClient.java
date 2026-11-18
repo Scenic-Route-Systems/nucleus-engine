@@ -225,10 +225,6 @@ public class SfdcClient extends SFDCPartnerAPIClient {
   public List<SObject> getCampaignsByNames(List<String> names, String... extraFields) throws ConnectionException, InterruptedException {
     return getBulkResults(names, "Name", "Campaign", CAMPAIGN_FIELDS, env.getConfig().salesforce.customQueryFields.campaign, extraFields);
   }
-  public List<SObject> getCampaignsByUniqueField(String fieldName, List<String> values, String... extraFields) throws ConnectionException, InterruptedException {
-    extraFields = ArrayUtils.add(extraFields, fieldName);
-    return getBulkResults(values, fieldName, "Campaign", CAMPAIGN_FIELDS, env.getConfig().salesforce.customQueryFields.campaign, extraFields);
-  }
 
   public Map<String, List<SObject>> getCampaignsByContactIds(List<String> contactIds, String filter) throws ConnectionException, InterruptedException {
     return getCampaignsByIds(contactIds, "ContactId", filter);

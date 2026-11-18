@@ -873,17 +873,8 @@ public class SfdcCrmService implements CrmService {
     return sfdcClient.insert(campaign).getId();
   }
 
-  @Override
-  public boolean updateCampaign(CrmCampaign crmCampaign) throws Exception {
-    SObject campaign = new SObject("Campaign");
-    campaign.setId(crmCampaign.id);
-    setCampaignFields(campaign, crmCampaign);
-    return sfdcClient.update(campaign).getSuccess();
-  }
-
   protected void setCampaignFields(SObject campaign, CrmCampaign crmCampaign) throws Exception {
     campaign.setField("Name", crmCampaign.name);
-    setField(campaign, env.getConfig().salesforce.fieldDefinitions.campaignExternalReference, crmCampaign.externalReference);
     campaign.setField("StartDate", Utils.toCalendar(crmCampaign.startDate, env.getConfig().timezoneId));
     campaign.setField("EndDate", Utils.toCalendar(crmCampaign.endDate, env.getConfig().timezoneId));
 
@@ -896,18 +887,6 @@ public class SfdcCrmService implements CrmService {
     for (String fieldName : crmCampaign.crmRawFieldsToSet.keySet()) {
       campaign.setField(fieldName, crmCampaign.crmRawFieldsToSet.get(fieldName));
     }
-  }
-
-  @Override
-  public List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception {
-    return toCrmCampaign(sfdcClient.getCampaignsByUniqueField(env.getConfig().salesforce.fieldDefinitions.campaignExternalReference, List.of(externalReference)));
-  }
-
-  @Override
-  public void deleteCampaign(String campaignId) throws Exception {
-    SObject campaign = new SObject("Campaign");
-    campaign.setId(campaignId);
-    sfdcClient.delete(campaign);
   }
 
   @Override
@@ -2438,7 +2417,6 @@ public class SfdcCrmService implements CrmService {
     return new CrmCampaign(
         (String) sObject.getField("Id"),
         (String) sObject.getField("Name"),
-        (String) sObject.getField(env.getConfig().salesforce.fieldDefinitions.campaignExternalReference),
         startDate,
         endDate,
         (String) sObject.getField("RecordTypeId"),

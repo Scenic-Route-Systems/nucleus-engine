@@ -9,7 +9,6 @@ import java.time.ZonedDateTime;
 public class CrmCampaign extends CrmRecord {
 
   public String name;
-  public String externalReference;
   public ZonedDateTime startDate;
   public ZonedDateTime endDate;
   public String recordTypeId;
@@ -23,7 +22,6 @@ public class CrmCampaign extends CrmRecord {
   public CrmCampaign(
       String id,
       String name,
-      String externalReference,
       ZonedDateTime startDate,
       ZonedDateTime endDate,
       String recordTypeId,
@@ -34,7 +32,6 @@ public class CrmCampaign extends CrmRecord {
     super(id, crmRawObject, crmUrl);
 
     this.name = name;
-    this.externalReference = externalReference;
     this.startDate = startDate;
     this.endDate = endDate;
     this.recordTypeId = recordTypeId;

@@ -128,8 +128,6 @@ public class EnvironmentConfig implements Serializable {
     public String sisContactId = "";
     public String sisHouseholdId = "";
 
-    public String campaignExternalReference = "";
-
     // TODO: refactor all of the above into record-specific definitions (below)
 
     public ContactCRMFieldDefinitions contact = new ContactCRMFieldDefinitions();
@@ -378,13 +376,6 @@ public class EnvironmentConfig implements Serializable {
     // Sync emergency contacts, in addition to parents/grandparents?
     public boolean syncEmergency = false;
   }
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // EVENTS
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // secretKey = Eventbrite private token
-  public Platform eventBrite = new Platform();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // OPS

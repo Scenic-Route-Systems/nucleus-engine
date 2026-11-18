@@ -401,21 +401,6 @@ public class VirtuousCrmService implements CrmService {
   }
 
   @Override
-  public boolean updateCampaign(CrmCampaign crmCampaign) throws Exception {
-    return true;
-  }
-
-  @Override
-  public List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void deleteCampaign(String campaignId) throws Exception {
-
-  }
-
-  @Override
   public boolean updateRecurringDonation(ManageDonationEvent manageDonationEvent) throws Exception {
     CrmRecurringDonation crmRecurringDonation = manageDonationEvent.getCrmRecurringDonation();
     VirtuousClient.RecurringGift recurringGift = (VirtuousClient.RecurringGift) crmRecurringDonation.crmRawObject;

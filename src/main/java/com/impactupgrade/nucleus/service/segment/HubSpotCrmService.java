@@ -751,21 +751,6 @@ public class HubSpotCrmService implements CrmService {
     return null;
   }
 
-  @Override
-  public boolean updateCampaign(CrmCampaign crmCampaign) throws Exception {
-    return true;
-  }
-
-  @Override
-  public List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception {
-    return Collections.emptyList();
-  }
-
-  @Override
-  public void deleteCampaign(String campaignId) throws Exception {
-
-  }
-
   // TODO: imports are being reworked in a different PR, so purely commenting these out for now
 
   @Override

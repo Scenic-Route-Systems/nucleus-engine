@@ -388,21 +388,6 @@ public class SharePointCrmService implements CrmService {
     }
 
     @Override
-    public boolean updateCampaign(CrmCampaign crmCampaign) throws Exception {
-      return true;
-    }
-
-    @Override
-    public List<CrmCampaign> getCampaignsByExternalReference(String externalReference) throws Exception {
-        return Collections.emptyList();
-    }
-
-    @Override
-    public void deleteCampaign(String campaignId) throws Exception {
-
-    }
-
-    @Override
     public PagedResults<CrmContact> getEmailContacts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
         return new PagedResults<>();
     }
