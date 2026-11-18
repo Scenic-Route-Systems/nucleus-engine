@@ -5,7 +5,6 @@
 package com.impactupgrade.nucleus.service.segment;
 
 import com.google.common.base.Strings;
-import com.google.common.cache.Cache;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -28,7 +27,6 @@ import com.impactupgrade.nucleus.model.CrmNote;
 import com.impactupgrade.nucleus.model.CrmOpportunity;
 import com.impactupgrade.nucleus.model.CrmRecord;
 import com.impactupgrade.nucleus.model.CrmRecurringDonation;
-import com.impactupgrade.nucleus.model.CrmUser;
 import com.impactupgrade.nucleus.model.ManageDonationEvent;
 import com.impactupgrade.nucleus.model.PagedResults;
 import com.impactupgrade.nucleus.util.CacheUtil;
@@ -2820,14 +2818,6 @@ public class SfdcCrmService implements CrmService {
         sObject,
         "https://" + env.getConfig().salesforce.url + "/lightning/r/Task/" + sObject.getField("Id") + "/view"
     );
-  }
-
-  protected CrmUser toCrmUser(XmlObject sObject) {
-    return new CrmUser((String) sObject.getField("Id"), (String) sObject.getField("Email"));
-  }
-
-  protected Optional<CrmUser> toCrmUser(Optional<SObject> sObject) {
-    return sObject.map(this::toCrmUser);
   }
 
   protected PagedResults<CrmAccount> toCrmAccountPages(List<QueryResult> queryResults) {
