@@ -210,17 +210,6 @@ public class HubSpotCrmService implements CrmService {
     // TODO
     return Collections.emptyList();
   }
-  @Override
-  public Optional<CrmUser> getUserById(String id) throws Exception {
-    // TODO: will need to add User support to HS lib, if even possible
-    return Optional.empty();
-  }
-
-  @Override
-  public Optional<CrmUser> getUserByEmail(String id) throws Exception {
-    // TODO: will need to add User support to HS lib, if even possible
-    return Optional.empty();
-  }
 
   @Override
   public PagedResults.ResultSet<CrmContact> queryMoreContacts(String queryLocator) throws Exception {

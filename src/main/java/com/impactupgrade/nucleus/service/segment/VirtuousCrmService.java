@@ -22,7 +22,6 @@ import com.impactupgrade.nucleus.model.CrmImportEvent;
 import com.impactupgrade.nucleus.model.CrmNote;
 import com.impactupgrade.nucleus.model.CrmOpportunity;
 import com.impactupgrade.nucleus.model.CrmRecurringDonation;
-import com.impactupgrade.nucleus.model.CrmUser;
 import com.impactupgrade.nucleus.model.ManageDonationEvent;
 import com.impactupgrade.nucleus.model.PagedResults;
 import org.apache.commons.collections.CollectionUtils;
@@ -555,16 +554,6 @@ public class VirtuousCrmService implements CrmService {
   public Map<String, List<String>> getContactsCampaigns(List<CrmContact> crmContacts,
       EnvironmentConfig.CommunicationList communicationList) throws Exception {
     return null;
-  }
-
-  @Override
-  public Optional<CrmUser> getUserById(String id) throws Exception {
-    return Optional.empty();
-  }
-
-  @Override
-  public Optional<CrmUser> getUserByEmail(String email) throws Exception {
-    return Optional.empty();
   }
 
   @Override

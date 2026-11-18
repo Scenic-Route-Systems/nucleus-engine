@@ -7,6 +7,7 @@ package com.impactupgrade.nucleus.service.segment;
 import com.impactupgrade.nucleus.environment.EnvironmentConfig;
 import com.impactupgrade.nucleus.model.AccountSearch;
 import com.impactupgrade.nucleus.model.CrmAccount;
+import com.impactupgrade.nucleus.model.CrmActivity;
 import com.impactupgrade.nucleus.model.CrmCampaign;
 import com.impactupgrade.nucleus.model.CrmContact;
 import com.impactupgrade.nucleus.model.CrmCustomField;
@@ -15,8 +16,6 @@ import com.impactupgrade.nucleus.model.CrmImportEvent;
 import com.impactupgrade.nucleus.model.CrmNote;
 import com.impactupgrade.nucleus.model.CrmOpportunity;
 import com.impactupgrade.nucleus.model.CrmRecurringDonation;
-import com.impactupgrade.nucleus.model.CrmActivity;
-import com.impactupgrade.nucleus.model.CrmUser;
 import com.impactupgrade.nucleus.model.ManageDonationEvent;
 
 import java.util.Collections;
@@ -128,14 +127,6 @@ public interface BasicCrmService extends CrmService {
   }
 
   default void deleteCampaign(String campaignId) throws Exception {
-  }
-
-  default Optional<CrmUser> getUserById(String id) throws Exception {
-    return Optional.empty();
-  }
-
-  default Optional<CrmUser> getUserByEmail(String email) throws Exception {
-    return Optional.empty();
   }
 
   default void batchInsertActivity(CrmActivity crmActivity) throws Exception {

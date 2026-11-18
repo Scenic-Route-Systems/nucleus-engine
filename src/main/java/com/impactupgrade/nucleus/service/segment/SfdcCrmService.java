@@ -252,15 +252,6 @@ public class SfdcCrmService implements CrmService {
 
     return clauses;
   }
-  @Override
-  public Optional<CrmUser> getUserById(String id) throws Exception {
-    return toCrmUser(sfdcClient.getUserById(id));
-  }
-
-  @Override
-  public Optional<CrmUser> getUserByEmail(String email) throws Exception {
-    return toCrmUser(sfdcClient.getUserByEmail(email));
-  }
 
   @Override
   public PagedResults.ResultSet<CrmContact> queryMoreContacts(String queryLocator) throws Exception {
