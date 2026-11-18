@@ -6,7 +6,6 @@ package com.impactupgrade.nucleus.dao;
 
 import com.google.common.base.Strings;
 import com.impactupgrade.nucleus.entity.Job;
-import com.impactupgrade.nucleus.entity.JobProgress;
 import com.impactupgrade.nucleus.entity.Organization;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -28,7 +27,6 @@ public class HibernateUtil {
 
       // core
       configuration.addAnnotatedClass(Job.class);
-      configuration.addAnnotatedClass(JobProgress.class);
       configuration.addAnnotatedClass(Organization.class);
 
       // hibernate.properties is loaded by the registry builder, so env var overrides must be applied there (not on
