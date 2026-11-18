@@ -71,7 +71,6 @@ public class SfdcClient extends SFDCPartnerAPIClient {
   protected String LEAD_FIELDS;
   protected String DONATION_FIELDS;
   protected String RECURRINGDONATION_FIELDS;
-  protected String USER_FIELDS;
   protected String REPORT_FIELDS;
   protected String TASK_FIELDS;
 
@@ -108,7 +107,6 @@ public class SfdcClient extends SFDCPartnerAPIClient {
     CONTACT_FIELDS = "Id, AccountId, OwnerId, Owner.Id, Owner.Name, Owner.IsActive, FirstName, LastName, Title, Account.Id, Account.Name, Account.BillingStreet, Account.BillingCity, Account.BillingPostalCode, Account.BillingState, Account.BillingCountry, Account.ShippingStreet, Account.ShippingCity, Account.ShippingPostalCode, Account.ShippingState, Account.ShippingCountry, Name, Email, mailingstreet, mailingcity, mailingstate, mailingpostalcode, mailingcountry, CreatedDate, MobilePhone, Phone";
     LEAD_FIELDS = "Id, FirstName, LastName, Email, OwnerId, Owner.Id, Owner.Name, Owner.IsActive";
     DONATION_FIELDS = "id, AccountId, Account.Id, Account.Name, ContactId, Amount, Name, CampaignId, Campaign.ParentId, CloseDate, StageName, Type, Description, OwnerId, Owner.Id, Owner.IsActive";
-    USER_FIELDS = "id, name, firstName, lastName, Email, phone";
     REPORT_FIELDS = "Id, Name";
     TASK_FIELDS = "Id, WhoId, OwnerId, Subject, description, status, priority, activityDate";
 

@@ -56,11 +56,6 @@ public class Utils {
     return s.length() > maxChars ? s.substring(0, maxChars - 1) + "..." : s;
   }
 
-  public static String lowercase(String s) {
-    if (s == null) return null;
-    return s.toLowerCase(Locale.ROOT);
-  }
-
   public static String noWhitespace(String s) {
     if (s == null) return null;
     return s.replaceAll("\\s", "");

@@ -49,28 +49,6 @@ public class BrevoClient {
     apiKey.setApiKey(brevoConfig.secretKey);
   }
 
-  public void createContact(CreateContact createContact, String listId) throws ApiException {
-    Long id = Utils.parseLong(listId);
-    createContact.setListIds(List.of(id));
-    ContactsApi api = new ContactsApi();
-    api.createContact(createContact);
-  }
-
-  public List<GetContactDetails> getContacts(Calendar modifiedSince, Calendar createdSince, List<Long> listIds) throws ApiException {
-    Long offset = 0L;
-    ContactsApi contactsApi = new ContactsApi();
-    GetContacts contacts = contactsApi.getContacts(CONTACTS_API_LIMIT.longValue(), offset, Utils.toDateString(modifiedSince, DATE_TIME_FORMAT), Utils.toDateString(createdSince, DATE_TIME_FORMAT), null, null, listIds);
-    List<GetContactDetails> allContacts = new ArrayList<>(toGetContactDetails(contacts));
-
-    while (contacts.getCount() > allContacts.size()) {
-      offset = (long) allContacts.size();
-      env.logJobInfo("retrieving contacts (offset {} of total {})", offset, contacts.getCount());
-      contacts = contactsApi.getContacts(CONTACTS_API_LIMIT.longValue(), offset, Utils.toDateString(modifiedSince, DATE_TIME_FORMAT), null, null, null, null);
-      allContacts.addAll(toGetContactDetails(contacts));
-    }
-    return allContacts;
-  }
-
   public List<GetContactDetails> getContactsFromList(String listId) throws ApiException {
     return getContactsFromList(null, listId);
   }
