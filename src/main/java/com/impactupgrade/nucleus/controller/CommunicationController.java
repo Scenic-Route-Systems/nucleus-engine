@@ -22,7 +22,8 @@ import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.List;
 
-@Path("/communication")
+// /email is the legacy path, retained for backward compatibility
+@Path("/{base: communication|email}")
 public class CommunicationController {
 
   protected final EnvironmentFactory envFactory;
@@ -149,12 +150,14 @@ public class CommunicationController {
       @Context HttpServletRequest request
   ) throws Exception {
     Environment env = envFactory.init(request);
+    // the legacy /email/upsert endpoint accepted service as a query param
+    String _serviceName = serviceName != null ? serviceName : request.getParameter("service");
     Runnable thread = () -> {
       try {
         String jobName = "Communication: Single Contact";
         env.startJobLog(JobType.EVENT, null, jobName, "Nucleus Portal");
 
-        List<CommunicationService> communicationServices = env.communicationServices(serviceName);
+        List<CommunicationService> communicationServices = env.communicationServices(_serviceName);
 
         for (CommunicationService communicationService : communicationServices) {
           try {

@@ -6,7 +6,6 @@ package com.impactupgrade.nucleus;
 
 import com.impactupgrade.nucleus.controller.CommunicationController;
 import com.impactupgrade.nucleus.controller.CrmController;
-import com.impactupgrade.nucleus.controller.EmailController;
 import com.impactupgrade.nucleus.controller.EventBriteController;
 import com.impactupgrade.nucleus.controller.FactsController;
 import com.impactupgrade.nucleus.controller.JobController;
@@ -87,7 +86,6 @@ public class App {
     apiConfig.register(communicationController());
     apiConfig.register(dataSyncController());
     apiConfig.register(crmController());
-    apiConfig.register(emailController());
     apiConfig.register(eventBriteController());
     apiConfig.register(factsController());
     apiConfig.register(jobController());
@@ -140,7 +138,6 @@ public class App {
   protected CommunicationController communicationController() { return new CommunicationController(envFactory); }
   protected DataSyncController dataSyncController() { return new DataSyncController(envFactory); }
   protected CrmController crmController() { return new CrmController(envFactory); }
-  protected EmailController emailController() { return new EmailController(envFactory); }
   protected EventBriteController eventBriteController() { return new EventBriteController(envFactory); }
   protected FactsController factsController() { return new FactsController(envFactory); }
   protected JobController jobController() { return new JobController(envFactory); }
