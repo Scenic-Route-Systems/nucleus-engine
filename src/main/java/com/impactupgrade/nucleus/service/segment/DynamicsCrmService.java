@@ -7,19 +7,15 @@ package com.impactupgrade.nucleus.service.segment;
 import com.google.common.base.Strings;
 import com.impactupgrade.nucleus.client.DynamicsCrmClient;
 import com.impactupgrade.nucleus.environment.Environment;
-import com.impactupgrade.nucleus.environment.EnvironmentConfig;
 import com.impactupgrade.nucleus.model.ContactSearch;
 import com.impactupgrade.nucleus.model.CrmAccount;
 import com.impactupgrade.nucleus.model.CrmAddress;
 import com.impactupgrade.nucleus.model.CrmContact;
-import com.impactupgrade.nucleus.model.CrmContactListType;
 import com.impactupgrade.nucleus.model.CrmDonation;
 import com.impactupgrade.nucleus.model.PagedResults;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -94,11 +90,6 @@ public class DynamicsCrmService implements BasicCrmService {
   }
 
   @Override
-  public List<CrmDonation> getDonationsByCustomerId(String customerId) throws Exception {
-    return List.of();
-  }
-
-  @Override
   public String insertDonation(CrmDonation crmDonation) throws Exception {
     DynamicsCrmClient.Opportunity insertedOpportunity = dynamicsCrmClient.insertOpportunity(toOpportunity(crmDonation));
     return insertedOpportunity.id;
@@ -108,17 +99,6 @@ public class DynamicsCrmService implements BasicCrmService {
   public boolean updateDonation(CrmDonation crmDonation) throws Exception {
     dynamicsCrmClient.updateOpportunity(toOpportunity(crmDonation));
     return true;
-  }
-
-  @Override
-  public boolean refundDonation(CrmDonation crmDonation) throws Exception {
-    //TODO: howto?
-    return true;
-  }
-
-  @Override
-  public PagedResults<CrmDonation> getDonations(Calendar updatedAfter) throws Exception {
-    return new PagedResults<>();
   }
 
   private CrmDonation toCrmDonation(DynamicsCrmClient.Opportunity opportunity) {
@@ -160,66 +140,6 @@ public class DynamicsCrmService implements BasicCrmService {
     //TODO: rest of the mappings
     //TODO: set custom fields! (should set fields according to custom fields' logical names)
     return opportunity;
-  }
-
-  @Override
-  public PagedResults<CrmContact> getEmailContacts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-    return new PagedResults<>();
-  }
-
-  @Override
-  public PagedResults<CrmAccount> getEmailAccounts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-    return new PagedResults<>();
-  }
-
-  @Override
-  public PagedResults<CrmContact> getSmsContacts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-    return new PagedResults<>();
-  }
-
-  @Override
-  public PagedResults<CrmContact> getDonorIndividualContacts(Calendar updatedSince) throws Exception {
-    return new PagedResults<>();
-  }
-
-  @Override
-  public PagedResults<CrmAccount> getDonorOrganizationAccounts(Calendar updatedSince) throws Exception {
-    return new PagedResults<>();
-  }
-
-  @Override
-  public PagedResults.ResultSet<CrmContact> queryMoreContacts(String queryLocator) throws Exception {
-    return null;
-  }
-
-  @Override
-  public PagedResults.ResultSet<CrmAccount> queryMoreAccounts(String queryLocator) throws Exception {
-    return null;
-  }
-
-  @Override
-  public PagedResults.ResultSet<CrmDonation> queryMoreDonations(String queryLocator) throws Exception {
-    return null;
-  }
-
-  @Override
-  public double getDonationsTotal(String filter) throws Exception {
-    return 0;
-  }
-
-  @Override
-  public Map<String, String> getContactLists(CrmContactListType listType) throws Exception {
-    return null;
-  }
-
-  @Override
-  public Map<String, String> getFieldOptions(String object) throws Exception {
-    return null;
-  }
-
-  @Override
-  public EnvironmentConfig.CRMFieldDefinitions getFieldDefinitions() {
-    return null;
   }
 
   // Account

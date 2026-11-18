@@ -5,17 +5,13 @@
 package com.impactupgrade.nucleus.service.segment;
 
 import com.impactupgrade.nucleus.environment.Environment;
-import com.impactupgrade.nucleus.environment.EnvironmentConfig;
 import com.impactupgrade.nucleus.model.ContactSearch;
-import com.impactupgrade.nucleus.model.CrmAccount;
 import com.impactupgrade.nucleus.model.CrmContact;
-import com.impactupgrade.nucleus.model.CrmContactListType;
 import com.impactupgrade.nucleus.model.CrmDonation;
 import com.impactupgrade.nucleus.model.PagedResults;
 import com.impactupgrade.nucleus.util.GoogleSheetsUtil;
 import com.impactupgrade.nucleus.util.Utils;
 
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -81,11 +77,6 @@ public class GoogleSheetCrmService implements BasicCrmService {
     }
 
     @Override
-    public List<CrmDonation> getDonationsByCustomerId(String customerId) throws Exception {
-        return List.of();
-    }
-
-    @Override
     public String insertDonation(CrmDonation crmDonation) throws Exception {
         return null;
     }
@@ -93,76 +84,6 @@ public class GoogleSheetCrmService implements BasicCrmService {
     @Override
     public boolean updateDonation(CrmDonation crmDonation) throws Exception {
       return true;
-    }
-
-    @Override
-    public boolean refundDonation(CrmDonation crmDonation) throws Exception {
-      return true;
-    }
-
-    @Override
-    public PagedResults<CrmDonation> getDonations(Calendar updatedAfter) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public PagedResults.ResultSet<CrmContact> queryMoreContacts(String queryLocator) throws Exception {
-        return null;
-    }
-
-    @Override
-    public PagedResults.ResultSet<CrmAccount> queryMoreAccounts(String queryLocator) throws Exception {
-        return null;
-    }
-
-    @Override
-    public PagedResults.ResultSet<CrmDonation> queryMoreDonations(String queryLocator) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Map<String, String> getContactLists(CrmContactListType listType) throws Exception {
-        return Collections.emptyMap();
-    }
-
-    @Override
-    public Map<String, String> getFieldOptions(String object) throws Exception {
-        return Collections.emptyMap();
-    }
-
-    @Override
-    public PagedResults<CrmContact> getEmailContacts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public PagedResults<CrmAccount> getEmailAccounts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public PagedResults<CrmContact> getSmsContacts(Calendar updatedSince, EnvironmentConfig.CommunicationList communicationList) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public PagedResults<CrmContact> getDonorIndividualContacts(Calendar updatedSince) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public PagedResults<CrmAccount> getDonorOrganizationAccounts(Calendar updatedSince) throws Exception {
-        return new PagedResults<>();
-    }
-
-    @Override
-    public double getDonationsTotal(String filter) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public EnvironmentConfig.CRMFieldDefinitions getFieldDefinitions() {
-        return null;
     }
 
     protected CrmContact toCrmContact(Map<String, String> map) {
