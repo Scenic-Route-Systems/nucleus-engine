@@ -42,7 +42,7 @@ TODO
 - Jetty (embedded)
 - Jersey (REST)
 - Apache CXF (SOAP)
-- Platform SDKs, provided by the vendors or our additional [open source libraries](https://github.com/impactupgrade)
+- Platform SDKs, provided by the vendors or our additional [open source libraries](https://github.com/Scenic-Route-Systems)
 - Misc, standard libs in the JVM ecosystem
 
 And that's it. Raw, clean, Java code, as God intended.
