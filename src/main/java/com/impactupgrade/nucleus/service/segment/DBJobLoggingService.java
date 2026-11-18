@@ -4,10 +4,8 @@
 
 package com.impactupgrade.nucleus.service.segment;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.impactupgrade.nucleus.dao.HibernateUtil;
 import com.impactupgrade.nucleus.entity.Job;
-import com.impactupgrade.nucleus.entity.JobFrequency;
 import com.impactupgrade.nucleus.entity.JobStatus;
 import com.impactupgrade.nucleus.entity.JobType;
 import com.impactupgrade.nucleus.entity.Organization;
@@ -107,17 +105,9 @@ public class DBJobLoggingService implements JobLoggingService {
     job.jobName = jobName;
     job.originatingPlatform = originatingPlatform;
 
-    job.payload = new ObjectMapper().createObjectNode();
-
     job.status = JobStatus.ACTIVE;
-    job.scheduleFrequency = JobFrequency.ONETIME;
-    job.scheduleInterval = 1;
-    Instant now = Instant.now();
-    job.scheduleStart = now; // one-time run
-    job.scheduleEnd = now;
     job.org = org;
-    job.startedAt = now;
-    job.scheduleTz = "UTC";
+    job.startedAt = Instant.now();
 
     return job;
   }
