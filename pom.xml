@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  ~ Copyright (c) 2021 3River Development LLC, DBA Impact Upgrade. All rights reserved.
+  ~ Copyright (c) 2026 Scenic Route Systems LLC. All rights reserved.
   -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -31,15 +31,15 @@
     </license>
   </licenses>
   <organization>
-    <name>Impact Upgrade</name>
-    <url>https://www.impactupgrade.com</url>
+    <name>Scenic Route Systems</name>
+    <url>https://scenicroute.systems/</url>
   </organization>
   <developers>
     <developer>
       <name>Brett Meyer</name>
-      <email>brett@impactupgrade.com</email>
-      <organization>Impact Upgrade</organization>
-      <organizationUrl>https://www.impactupgrade.com</organizationUrl>
+      <email>brett@scenicroute.systems</email>
+      <organization>Scenic Route Systems</organization>
+      <organizationUrl>https://scenicroute.systems/</organizationUrl>
     </developer>
   </developers>
 

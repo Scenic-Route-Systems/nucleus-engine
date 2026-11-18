@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 3River Development LLC, DBA Impact Upgrade. All rights reserved.
+ * Copyright (c) 2026 Scenic Route Systems LLC. All rights reserved.
  */
 
 package com.impactupgrade.nucleus.service.segment;
@@ -17,7 +17,6 @@ import com.impactupgrade.nucleus.model.CrmContact;
 import com.impactupgrade.nucleus.util.Utils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;

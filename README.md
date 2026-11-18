@@ -57,9 +57,9 @@ TODO: diagrams
 
 TODO
 
-## Impact Upgrade
+## Scenic Route Systems
 
-[Impact Upgrade](https://www.impactupgrade.com) is a software engineering and data company that partners with nonprofits and people-serving businesses. We provide tech-for-humans, making the complex simple so organizations can focus on impact. FOCUS AREAS: integration, automation, databases & CRMs, data-intensive software development, at-scale systems, long-term partnerships, and consulting. We'd love to serve you!
+[Scenic Route Systems](https://scenicroute.systems/) is a software engineering and data company that partners with nonprofits and people-serving businesses. We provide tech-for-humans, making the complex simple so organizations can focus on impact. FOCUS AREAS: integration, automation, databases & CRMs, data-intensive software development, at-scale systems, long-term partnerships, and consulting. We'd love to serve you!
 
 ## License
 
@@ -67,4 +67,4 @@ Licensed under the PolyForm Noncommercial License 1.0.0. In its simplest form, T
 
 ## Copyright
 
-Copyright (c) 2024 3River Development LLC, DBA Impact Upgrade. All rights reserved.
+Copyright (c) 2026 Scenic Route Systems LLC. All rights reserved.
