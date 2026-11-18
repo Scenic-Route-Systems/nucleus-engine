@@ -1083,18 +1083,6 @@ public class HubSpotCrmService implements CrmService {
   }
 
   @Override
-  public Map<String, String> getFieldOptions(String object) throws Exception {
-    Map<String, String> propertyLabelToName = new HashMap<>();
-    PropertiesResponse response = propertiesClient.readAll(object);
-
-    for(Property property : response.getResults()){
-      propertyLabelToName.put(property.getLabel(), property.getName());
-    }
-
-    return propertyLabelToName;
-  }
-
-  @Override
   public Map<String, List<String>> getContactsCampaigns(List<CrmContact> crmContacts,
       EnvironmentConfig.CommunicationList communicationList) throws Exception {
     // TODO

@@ -10,7 +10,6 @@ import com.impactupgrade.nucleus.environment.Environment;
 import com.impactupgrade.nucleus.util.Utils;
 import com.sforce.soap.metadata.Connector;
 import com.sforce.soap.metadata.CustomField;
-import com.sforce.soap.metadata.CustomObject;
 import com.sforce.soap.metadata.CustomValue;
 import com.sforce.soap.metadata.FieldType;
 import com.sforce.soap.metadata.FileProperties;
@@ -41,9 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -436,32 +433,4 @@ public class SfdcMetadataClient {
     }
     return fieldName;
   }
-
-  /**
-   * @param component The Record type eg. "Account", "Contact", "Campaign"
-   * @return A map of field labels to their api name, will use the API name for the label if the label is missing
-   * @throws ConnectionException
-   */
-  public Map<String, String> getObjectFields(String component) throws ConnectionException {
-    Map<String, String> fieldLabelToAPIName = new HashMap<>();
-
-    SfdcMetadataClient sfdcMetadataClient = new SfdcMetadataClient(env);
-    MetadataConnection metadataConnection = sfdcMetadataClient.metadataConn();
-    ReadResult readResult = metadataConnection.readMetadata("CustomObject", new String[] {component});
-    Metadata[] mdInfo = readResult.getRecords();
-
-    for (Metadata md : mdInfo) {
-      CustomObject customObject = (CustomObject) md;
-
-      for (CustomField field : customObject.getFields()) {
-        if (field.getLabel() == null) {
-          fieldLabelToAPIName.put(field.getFullName(), field.getFullName());
-        } else {
-          fieldLabelToAPIName.put(field.getLabel(), field.getFullName());
-        }
-      }
-    }
-    return fieldLabelToAPIName;
-  }
-
 }

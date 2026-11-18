@@ -11,8 +11,6 @@ import com.impactupgrade.nucleus.entity.JobStatus;
 import com.impactupgrade.nucleus.entity.JobType;
 import com.impactupgrade.nucleus.environment.Environment;
 import com.impactupgrade.nucleus.environment.EnvironmentFactory;
-import com.impactupgrade.nucleus.model.ContactFormData;
-import com.impactupgrade.nucleus.model.ContactSearch;
 import com.impactupgrade.nucleus.model.CrmActivity;
 import com.impactupgrade.nucleus.model.CrmContact;
 import com.impactupgrade.nucleus.model.CrmContactListType;
@@ -28,7 +26,6 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -46,8 +43,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -55,7 +50,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.impactupgrade.nucleus.util.Utils.getZonedDateFromDateString;
@@ -73,91 +67,6 @@ public class CrmController {
 
   public CrmController(EnvironmentFactory envFactory) {
     this.envFactory = envFactory;
-  }
-
-  @Path("/contact")
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getContacts(
-          @QueryParam("keyword") String keywords,
-          @QueryParam("email") String email,
-          @QueryParam("phone") String phone,
-          @QueryParam("crmType") String crmType,
-          @Context HttpServletRequest request
-  ) throws Exception {
-    Environment env = envFactory.init(request);
-    SecurityUtil.verifyApiKey(env);
-
-    keywords = trim(keywords);
-    email = noWhitespace(email);
-    phone = trim(phone);
-
-    CrmService crmService = getCrmService(env, crmType);
-
-    List<CrmContact> contacts = Collections.emptyList();
-    if (!Strings.isNullOrEmpty(keywords)) {
-      env.logJobInfo("searching keyword={}", keywords);
-      contacts = crmService.searchContacts(ContactSearch.byKeywords(keywords), true).getResultsFromAllFirstPages();
-    } else if (!Strings.isNullOrEmpty(email)) {
-      env.logJobInfo("searching email={}", email);
-      contacts = crmService.searchContacts(ContactSearch.byEmail(email), true).getResultsFromAllFirstPages();
-    } else if (!Strings.isNullOrEmpty(phone)) {
-      env.logJobInfo("searching phone={}", phone);
-      contacts = crmService.searchContacts(ContactSearch.byPhone(phone), true).getResultsFromAllFirstPages();
-    } else {
-      env.logJobWarn("no search params provided");
-    }
-
-    if (contacts.isEmpty()) {
-      env.logJobInfo("Contact not found");
-      return Response.status(404).build();
-    } else {
-      env.logJobInfo("returning Contacts {}", contacts.stream().map(c -> c.id).collect(Collectors.joining(", ")));
-      return Response.status(200).entity(contacts).build();
-    }
-  }
-
-  @Path("/contact")
-  @POST
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response upsertContact(
-      CrmContact crmContact,
-      @QueryParam("crmType") String crmType,
-      @Context HttpServletRequest request
-  ) throws Exception {
-    Environment env = envFactory.init(request);
-    SecurityUtil.verifyApiKey(env);
-
-    try {
-      CrmService crmService = getCrmService(env, crmType);
-
-      List<CrmContact> existingContacts = env.contactService().findExistingContacts(crmContact);
-
-      if (existingContacts.isEmpty()) {
-        if (Strings.isNullOrEmpty(crmContact.account.id)) {
-          crmContact.account.id = crmService.insertAccount(crmContact.account);
-        } else {
-          crmService.updateAccount(crmContact.account);
-        }
-
-        crmService.insertContact(crmContact);
-
-      } else {
-        for (CrmContact existingContact : existingContacts) {
-          crmContact.account.id = existingContact.account.id;
-          crmContact.id = existingContact.id;
-
-          crmService.updateAccount(crmContact.account);
-          crmService.updateContact(crmContact);
-        }
-      }
-
-      return Response.ok().build();
-    } catch (Exception e) {
-      env.logJobError("failed to upsert the contact", e);
-      return Response.serverError().build();
-    }
   }
 
   @Path("/bulk-import/file")
@@ -333,19 +242,6 @@ public class CrmController {
     return Response.status(200).build();
   }
 
-  @Path("/contact-form")
-  @POST
-  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-  @Produces(MediaType.TEXT_PLAIN)
-  public Response contactForm(@BeanParam ContactFormData formData, @Context HttpServletRequest request) throws Exception {
-    Environment env = envFactory.init(request);
-    // no auth
-
-    env.contactService().processContactForm(formData);
-
-    return Response.status(200).build();
-  }
-
   @Path("/recurring-donations/search")
   @POST
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -492,50 +388,6 @@ public class CrmController {
     Map<String, String> lists = crmService.getContactLists(listType);
 
     return Response.status(200).entity(lists).build();
-  }
-
-  @Path("/contact-fields")
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public Response getContactFields(
-          @QueryParam("type") String type,
-          @QueryParam("crmType") String crmType,
-          @Context HttpServletRequest request
-  ) throws Exception {
-    Environment env = envFactory.init(request);
-    SecurityUtil.verifyApiKey(env);
-    CrmService crmService = getCrmService(env, crmType);
-    String filter = "";
-
-    if (Strings.isNullOrEmpty(type)) {
-      filter = "(?s).*";
-    } else {
-      switch (type) {
-        case "sms":
-          filter = ".*(?i:sms|opt|subscri|text|sign).*";
-          break;
-        case "contactLanguage":
-          filter = ".*(?i:prefer|lang).*";
-          break;
-        default:
-          filter = "(?s).*";
-          break;
-      }
-    }
-
-    Map<String, String> fullList = crmService.getFieldOptions("contact");
-
-    Map<String, String> filteredList = new HashMap<>();
-    Pattern pattern = Pattern.compile(filter);
-
-    for (Map.Entry<String, String> entry : fullList.entrySet()) {
-      String value = entry.getValue();
-      if (pattern.matcher(value).matches()) {
-        filteredList.put(entry.getKey(), value);
-      }
-    }
-
-    return Response.status(200).entity(filteredList).build();
   }
 
   @Path("/contact-list-members")

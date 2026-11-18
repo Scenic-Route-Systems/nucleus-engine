@@ -577,11 +577,6 @@ public class VirtuousCrmService implements CrmService {
   }
 
   @Override
-  public Map<String, String> getFieldOptions(String object) throws Exception {
-    return Collections.emptyMap();
-  }
-
-  @Override
   public void batchInsertActivity(CrmActivity crmActivity) throws Exception {
     VirtuousClient.Task task = asTask(crmActivity);
     virtuousClient.createTask(task);

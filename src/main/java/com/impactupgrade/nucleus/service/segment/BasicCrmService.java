@@ -192,10 +192,6 @@ public interface BasicCrmService extends CrmService {
     return Collections.emptyMap();
   }
 
-  default Map<String, String> getFieldOptions(String object) throws Exception {
-    return Collections.emptyMap();
-  }
-
   default void batchInsertActivity(CrmActivity crmActivity) throws Exception {
   }
 

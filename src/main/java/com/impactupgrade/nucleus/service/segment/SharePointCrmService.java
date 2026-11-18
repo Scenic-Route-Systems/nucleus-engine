@@ -24,7 +24,6 @@ import com.impactupgrade.nucleus.model.CrmImportEvent;
 import com.impactupgrade.nucleus.model.CrmNote;
 import com.impactupgrade.nucleus.model.CrmOpportunity;
 import com.impactupgrade.nucleus.model.CrmRecurringDonation;
-import com.impactupgrade.nucleus.model.CrmUser;
 import com.impactupgrade.nucleus.model.ManageDonationEvent;
 import com.impactupgrade.nucleus.model.PagedResults;
 import com.impactupgrade.nucleus.util.Utils;
@@ -430,11 +429,6 @@ public class SharePointCrmService implements CrmService {
 
     @Override
     public Map<String, String> getContactLists(CrmContactListType listType) throws Exception {
-        return Collections.emptyMap();
-    }
-
-    @Override
-    public Map<String, String> getFieldOptions(String object) throws Exception {
         return Collections.emptyMap();
     }
 

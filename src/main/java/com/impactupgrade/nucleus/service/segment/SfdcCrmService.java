@@ -74,9 +74,6 @@ public class SfdcCrmService implements CrmService {
   protected SfdcClient sfdcClient;
   protected SfdcMetadataClient sfdcMetadataClient;
 
-  // Globally scoped, since these are expensive calls that we want to minimize overall.
-  protected static Cache<String, Map<String, String>> objectFieldsCache = CacheUtil.buildManualCache();
-
   // Simply scoped to the service/environment/request, since it's more of a per-flow optimization (primarily for Bulk Upsert).
   protected LoadingCache<String, String> recordTypeNameToIdCache;
 
@@ -1126,20 +1123,6 @@ public class SfdcCrmService implements CrmService {
       }
     }
     return lists;
-  }
-
-  @Override
-  public Map<String, String> getFieldOptions(String object) throws Exception {
-    // include the apiKey for multitenant arenas, like nucleus-core
-    String cacheKey = env.getConfig().apiKey + "_" + object;
-    return objectFieldsCache.get(cacheKey, () -> {
-      try {
-        return sfdcMetadataClient.getObjectFields(object);
-      } catch (Exception e) {
-        env.logJobError("unable to fetch fields from {}", object, e);
-        return null;
-      }
-    });
   }
 
   @Override

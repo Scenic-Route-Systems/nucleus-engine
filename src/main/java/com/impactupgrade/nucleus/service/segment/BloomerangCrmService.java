@@ -358,11 +358,6 @@ public class BloomerangCrmService implements CrmService {
   }
 
   @Override
-  public Map<String, String> getFieldOptions(String object) throws Exception {
-    return Collections.emptyMap();
-  }
-
-  @Override
   public EnvironmentConfig.CRMFieldDefinitions getFieldDefinitions() {
     return this.env.getConfig().bloomerang.fieldDefinitions;
   }
