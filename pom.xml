@@ -59,7 +59,7 @@
   </build>
 
   <repositories>
-    <!-- allow sonatype snapshots, primarily for open source SDKs from Impact Upgrade -->
+    <!-- allow sonatype snapshots, primarily for open source SDKs from Scenic Route Systems -->
     <repository>
       <id>central-portal-snapshots</id>
       <url>https://central.sonatype.com/repository/maven-snapshots/</url>
