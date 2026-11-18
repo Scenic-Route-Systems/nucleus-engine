@@ -6,6 +6,7 @@ package com.impactupgrade.nucleus;
 
 import com.impactupgrade.nucleus.controller.CommunicationController;
 import com.impactupgrade.nucleus.controller.CrmController;
+import com.impactupgrade.nucleus.controller.DataSyncController;
 import com.impactupgrade.nucleus.controller.FactsController;
 import com.impactupgrade.nucleus.controller.JobController;
 import com.impactupgrade.nucleus.controller.MailchimpController;
@@ -13,14 +14,9 @@ import com.impactupgrade.nucleus.controller.MinistryByTextController;
 import com.impactupgrade.nucleus.controller.PaymentGatewayController;
 import com.impactupgrade.nucleus.controller.SfdcController;
 import com.impactupgrade.nucleus.controller.StripeController;
-import com.impactupgrade.nucleus.controller.DataSyncController;
 import com.impactupgrade.nucleus.controller.TwilioController;
 import com.impactupgrade.nucleus.environment.EnvironmentFactory;
 import com.impactupgrade.nucleus.security.SecurityExceptionMapper;
-import org.apache.cxf.Bus;
-import org.apache.cxf.BusFactory;
-import org.apache.cxf.bus.CXFBusFactory;
-import org.apache.cxf.transport.servlet.CXFNonSpringServlet;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.session.SessionHandler;
@@ -104,16 +100,6 @@ public class App {
 
     server.setHandler(context);
     server.start();
-
-    // SOAP (CXF)
-    System.setProperty(BusFactory.BUS_FACTORY_PROPERTY_NAME, CXFBusFactory.class.getName());
-    CXFNonSpringServlet cxf = new CXFNonSpringServlet();
-    ServletHolder soapServlet = new ServletHolder(cxf);
-    soapServlet.setName("soap");
-    soapServlet.setForcedPath("soap");
-    context.addServlet(soapServlet, "/soap/*");
-    Bus bus = cxf.getBus();
-    BusFactory.setDefaultBus(bus);
 
     registerServlets(context);
   }

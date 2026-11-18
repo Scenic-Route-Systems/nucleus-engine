@@ -5,10 +5,10 @@
 package com.impactupgrade.nucleus.util;
 
 import com.google.common.base.Strings;
-import com.sun.xml.ws.util.StringUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
@@ -93,7 +93,7 @@ public class Utils {
     // handles spaces and hyphens
     // Ex. first name bill smith-jones -> Bill Smith-Jones
     return Stream.of(name.trim().split("((?<=[-\\s])|(?=[-\\s]))"))
-            .map(x -> StringUtils.capitalize(x))
+            .map(StringUtils::capitalize)
             .collect(Collectors.joining());
   }
 

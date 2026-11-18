@@ -9,7 +9,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.util.StringUtils;
 
 import javax.persistence.NoResultException;
 import java.io.Serializable;
@@ -132,7 +131,7 @@ public class HibernateDao<I extends Serializable, E> {
   }
 
   public List<E> getQueryResultList(String queryString, boolean isNative, Session session) {
-    if (StringUtils.isEmpty(queryString)) {
+    if (Strings.isNullOrEmpty(queryString)) {
       return Collections.emptyList();
     }
 

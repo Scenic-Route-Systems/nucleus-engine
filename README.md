@@ -20,7 +20,7 @@ Nucleus is a full engine on its own, as well as a development framework. It was 
 Nucleus is broken down into a set of layers, containing a mix of abstract logic as well as vendor-specific clients. The end goal is to focus the business logic in abstract way, reusable within a variety of flows. The layers:
 
 - **Environment:** Defines configurations and context specific to an organization, such as the platform vendors and unique data.
-- **Controllers:** Endpoints receiving REST API calls, SOAP API calls, or webhook events. These typically come from a mix of third party platforms or web apps.
+- **Controllers:** Endpoints receiving REST API calls or webhook events. These typically come from a mix of third party platforms or web apps.
 - **Services:**
     - **Logic:**
         - "Logic" services handle a distinct unit of business logic in an abstract way. This could be how to handle a new customer/payment, what to do with an incoming SMS, etc. -- all agnostic to the specific vendors.
@@ -41,7 +41,6 @@ TODO
 - standard Java service interfaces (ServiceLoader), primarily driving SegmentServices and an organization's ability to override them
 - Jetty (embedded)
 - Jersey (REST)
-- Apache CXF (SOAP)
 - Platform SDKs, provided by the vendors or our additional [open source libraries](https://github.com/Scenic-Route-Systems)
 - Misc, standard libs in the JVM ecosystem
 
