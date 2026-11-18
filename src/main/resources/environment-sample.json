@@ -164,12 +164,6 @@
     }
   ],
 
-  "backblaze": {
-    "publicKey": "",
-    "secretKey": "",
-    "bucketId": ""
-  },
-
   "recaptcha": {
     "siteSecret": ""
   },

@@ -1,5 +1,4 @@
 .idea
 *.iml
 target
-backup-salesforce
 .DS_Store

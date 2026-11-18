@@ -192,13 +192,6 @@ https://github.com/impactupgrade/nucleus-engine/blob/master/src/main/resources/e
     }
   },
 
-  "backblaze": {
-    "publicKey": "abc123",
-    "secretKey": "abc123",
-
-    "bucketId": "abc123"
-  },
-
   "notifications": {
     "donations:card-expiring": {
       "email": {
