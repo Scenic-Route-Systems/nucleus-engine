@@ -6,7 +6,6 @@ package com.impactupgrade.nucleus.util;
 
 import com.google.common.base.Strings;
 import com.impactupgrade.nucleus.client.SfdcClient;
-import com.impactupgrade.nucleus.client.SfdcMetadataClient;
 import com.impactupgrade.nucleus.environment.Environment;
 import com.impactupgrade.nucleus.environment.EnvironmentConfig;
 import com.sforce.soap.partner.sobject.SObject;
@@ -53,23 +52,7 @@ public class RaisersEdgeToSalesforce {
       }
     };
 
-//    provisionFields(env);
-//    deleteFields(env);
 //    migrate(env);
-  }
-
-  private static void provisionFields(Environment env) throws Exception {
-    SfdcMetadataClient sfdcMetadataClient = new SfdcMetadataClient(env);
-
-//    sfdcMetadataClient.createCustomField("Account", "BB_Address_Type__c", "BB Address Type", FieldType.Text, 100);
-  }
-
-  private static void deleteFields(Environment env) throws Exception {
-    SfdcMetadataClient sfdcMetadataClient = new SfdcMetadataClient(env);
-
-//    sfdcMetadataClient.deleteCustomFields("Contact",
-//        "BB_Spouse_Business_Phone__c", "BB_Spouse_Phone__c", "BB_PhoneFinder__c", "BB_CnPh_1_02_Comments__c", "BB_CnPh_1_02_Do_Not_Contact__c", "BB_CnPh_1_02_Inactive__c", "BB_CnPh_1_02_Is_Primary__c", "BB_CnPh_1_02_Phone_number__c", "BB_CnPh_1_02_Phone_type__c", "BB_CnPh_1_03_Comments__c", "BB_CnPh_1_03_Do_Not_Contact__c", "BB_CnPh_1_03_Inactive__c", "BB_CnPh_1_03_Is_Primary__c", "BB_CnPh_1_03_Phone_number__c", "BB_CnPh_1_03_Phone_type__c"
-//    );
   }
 
   private static void migrate(Environment env) throws Exception {

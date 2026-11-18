@@ -345,13 +345,6 @@ public class SfdcMetadataClient {
     }
   }
 
-  public void deleteCustomFields(String objectName, String... fieldNames) throws ConnectionException {
-    MetadataConnection metadataConn = metadataConn();
-    for (String fieldName : fieldNames) {
-      Arrays.stream(metadataConn.deleteMetadata("CustomField", new String[]{objectName + "." + fieldName})).forEach(result -> env.logJobInfo(result.toString()));
-    }
-  }
-
   public void addFields(String layoutName, String sectionLabel, List<String> fieldNames) throws ConnectionException {
     if (Strings.isNullOrEmpty(layoutName)) {
       return;
