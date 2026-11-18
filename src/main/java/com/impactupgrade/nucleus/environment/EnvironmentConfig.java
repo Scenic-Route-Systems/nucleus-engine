@@ -388,24 +388,6 @@ public class EnvironmentConfig implements Serializable {
   public Platform eventBrite = new Platform();
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  // FORMS
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-  // NOTE: ODK is a data collection platform that we're using with a client, supporting offline mobile forms.
-  // That code currently lives in the client's unique instance of Nucleus, but we have plans to shift the common
-  // pieces here since ODK could be super useful in other nonprofits. For the moment, setting up env.json to support
-  // the connectivity.
-  public Odk odk = new Odk();
-  public static class Odk extends Platform {
-    public String url = "";
-    public List<OdkProject> projects = new ArrayList<>();
-  }
-  public static class OdkProject implements Serializable {
-    public Integer projectId = null;
-    public String form = "";
-  }
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   // OPS
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
