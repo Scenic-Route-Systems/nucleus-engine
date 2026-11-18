@@ -357,11 +357,6 @@ public class EnvironmentConfig implements Serializable {
   public static class Twilio extends Platform {
     public String senderPn = "";
     public String defaultResponse = "";
-    public Map<String, TwilioUser> users = new HashMap<>();
-  }
-  public static class TwilioUser implements Serializable {
-    public String senderPn;
-    public boolean recordOwnerFilter = true;
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
